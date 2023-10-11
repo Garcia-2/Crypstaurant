@@ -1,7 +1,7 @@
 # Crypstaurant
 Restaurant Ordering App
 
-Video Demo:
+Video Demo: https://youtu.be/777gio8iOrI
 
 Description:
 
