@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome To Your Satisfaction
+{% endblock %}
+
+{% block main %}
+    <div class="header-container">
+        <header class="header">
+            <h1>
+                <span>H</span>
+                <span>o</span>
+                <span>w</span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span>B</span>
+                <span>i</span>
+                <span>g</span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span>I</span>
+                <span>s</span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span>Y</span>
+                <span>o</span>
+                <span>u</span>
+                <span>r</span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span> </span>
+                <span>A</span>
+                <span>p</span>
+                <span>i</span>
+                <span>t</span>
+                <span>i</span>
+                <span>t</span>
+                <span>e</span>
+            </h1>
+        </header>
+    </div>
+
+    <img id="bnr" alt="Family Gathering" src="{{url_for('static', filename='images/Family Gathering.jpg')}}">
+
+    <div class="mb-3">
+        <label  for="address">Enter Your Address:</label>
+        <input class="form-control mx-auto w-auto" autocomplete="off" type="text" id="address" name="address" placeholder="Enter your address">
+        <button class="btn btn-primary" onclick="initMap()">Submit</button>
+    </div>
+
+    <!-- Map container -->
+    <div id="map" style="width: 100%; height: 400px;"></div>
+
+    <!-- Display distance information -->
+    <div id="distance-info">
+        <!-- Distance and estimated time information will be displayed here -->
+    </div>
+
+    <script>
+        // Initialize the map
+        function initMap() {
+            // Get the user's entered address from the form
+            var address = document.getElementById('address').value;
+
+            // Use a geocoding service to convert the address to coordinates
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function(results, status) {
+                if (status === 'OK' && results[0]) {
+                    // User's location found
+                    var userLocation = results[0].geometry.location;
+
+                    // Create the map centered at the user's location
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: userLocation,
+                        zoom: 12
+                    });
+
+                    // Add markers for user and shop
+                    var userMarker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: 'Your Location'
+                    });
+
+                    var shopLocation = { lat: -26.237490, lng: 27.932990 };
+                    var shopMarker = new google.maps.Marker({
+                        position: shopLocation,
+                        map: map,
+                        title: 'Shop Location'
+                    });
+
+                    // Calculate distance and estimated time
+                    var distanceService = new google.maps.DistanceMatrixService();
+                    distanceService.getDistanceMatrix(
+                        {
+                            origins: [userLocation],
+                            destinations: [shopLocation],
+                            travelMode: 'DRIVING'
+                        },
+                        function(response, status) {
+                            if (status === 'OK') {
+                                // Display distance and estimated time
+                                var element = document.getElementById('distance-info');
+                                element.innerHTML = 'Distance: ' + response.rows[0].elements[0].distance.text +
+                                    '<br>Estimated Time: ' + response.rows[0].elements[0].duration.text;
+                            }
+                        }
+                    );
+                } else {
+                    // User's location not found, use shop's location as default
+                    var shopLocation = { lat: -26.237490, lng: 27.932990 };
+
+                    // Create the map centered at the shop's location
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: shopLocation,
+                        zoom: 12
+                    });
+
+                    // Add a marker for the shop
+                    var shopMarker = new google.maps.Marker({
+                        position: shopLocation,
+                        map: map,
+                        title: 'Shop Location'
+                    });
+
+                    // Display a message indicating that the user's location is missing
+                    var element = document.getElementById('distance-info');
+                    element.innerHTML = 'User location not provided. Showing shop location as default.';
+                }
+            });
+        }
+    </script>
+    <div class="container">
+        {% for product in products %}
+            <div class="product">
+                <img alt="{{ product.name }}" src="{{ url_for('static', filename='images/' + product.image_filename) }}">
+                <h3>{{ product.name }}</h3>
+                <h6>{{ product.description }}</h6>
+                <h4>R{{ product.price }}</h4>
+                <form action="/add_to_cart/{{ product.id }}" method="post">
+                    <button class="btn btn-primary btn-order" data-productName="{{ product.name }}" data-productDiscription="{{ product.description }}" data-productPrice="{{ product.price }}">Add to Cart</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

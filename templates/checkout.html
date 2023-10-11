@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+
+{% block main %}
+
+    <div class="container mt-4">
+        <h1>Your Cart</h1>
+        {% if cart %}
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>R{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+
+
+                        {% endfor %}
+                        <td>Total: R{{ total_price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Nothing in the checkout</p>
+            {% endif %}
+        </div>
+    <div class="paypal">
+        <div id="paypal-button-container"></div>
+        <p id="result-message"></p>
+    </div>
+    <!-- Replace the "test" client-id value with your client-id -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AUR-za_IT1xufLFSYmHwl7plqkPWNTEWAtrDVr_bCVXol5wVvmelt2206h4c3Eqkplgt2nngtEw3qp2s&currency=USD"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+{% endblock %}

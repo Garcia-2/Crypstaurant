@@ -1,0 +1,188 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 20vh; /* Full viewport height */
+    margin-bottom: 20px;
+    background-color: yellow;
+}
+
+.header {
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 1px solid black; /* Cursor-style border */
+    animation: typing 10s steps(20) infinite;
+
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.animate-typing span {
+    display: inline-block;
+    animation: appear 5.0s forwards;
+    opacity: 0;
+}
+
+/* Keyframes for character appearance */
+@keyframes appear {
+    to {
+        opacity: 1;
+    }
+}
+
+#bnr {
+        width: 100%;
+        height: 500px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        background-color: black; /* Set the background color of the banner */
+
+}
+
+#bnr img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire banner */
+}
+
+.container {
+
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 100px auto;
+    justify-content: space-around;
+    color: white;
+}
+
+.product {
+
+    width: calc(100% - 20px);
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    clear: both;
+}
+
+.product img {
+
+    width: 100%;
+    height: 300px;
+    display: block;
+    /*display: flex;*/
+    border-radius: 5px;
+    margin-bottom: 50px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .product {
+        width: calc(33.33% - 10px); /* Three products per row on screens wider than 768px */
+        margin-bottom: 40px; /* Adjust spacing between rows for wider screens */
+        clear: none; /* Clearing is not needed for wider screens */
+    }
+}
+
+.product:hover {
+    transform:scale(1.05);
+    z-index: 2;
+}
+
+.btn-order {
+    background-color: yellow; /* yellow background color */
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#cart-total {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.frame {
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+#address {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+/* Custom CSS to control visibility on different screen sizes */
+@media (min-width: 992px) {
+    .custom-dropdown {
+        display: none; /* Hide dropdown on larger screens */
+    }
+    .custom-display-lg {
+        display: inline-block !important; /* Display items on larger screens */
+    }
+}
+
+#conman {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: blue;
+}
+
+#conman span.navbar-toggler-icon {
+    color: blue; /* Change to your desired color */
+}
+
+.paypal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+}
