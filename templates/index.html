@@ -145,7 +145,7 @@
                 <h6>{{ product.description }}</h6>
                 <h4>R{{ product.price }}</h4>
                 <form action="/add_to_cart/{{ product.id }}" method="post">
-                    <button class="btn btn-primary btn-order" data-productName="{{ product.name }}" data-productDiscription="{{ product.description }}" data-productPrice="{{ product.price }}">Add to Cart</button>
+                    <button class="btn btn-primary btn-order" data-productName="{{ product.name }}" data-productDescription="{{ product.description }}" data-productPrice="{{ product.price }}">Add to Cart</button>
                 </form>
             </div>
         {% endfor %}

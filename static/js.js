@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Function to add product to the cart
-    function addToCart(productName, productPrice) {
+    function addToCart(productName, productDescription, productPrice) {
         cart.push({ name: productName, description: productDescription, price: productPrice }); // Add product object to the cart array
         updateCartButton(); // Updating the cart button text
         updateCartInStorage(); // Update cart data in storage
